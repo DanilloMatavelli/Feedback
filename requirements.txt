@@ -1,1 +1,5 @@
+# Para instalar Flask pip install -r flask
 flask
+
+mysql-connector-python
+# Para instalar o Banco de ados pip install -r .\requirements.txt

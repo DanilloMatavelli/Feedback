@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentários</title>
+    <!-- Link usando jinja para linkar o css -->
+    <link rel="stylesheet" href="{{ url_for('static' , filename = 'style.css') }}">
+</head>
+<body>
+    <div class="container__title">
+        <h1>FEEDBACK 😎</h1>
+        <h2>SUPER MASTER PÁGINA</h2>
+    </div>
+    <form action= "/post/mensagem"  method = "POST" class="container__form">
+        <label class="container__label">Usuário</label>
+        <!-- Colocando name para chamar no app.py -->
+        <input name="usuario" class="container__input" type="text">
+
+        <label class="container__label">Mensagem</label>
+        <!-- Colocando name para chamar no app.py -->
+        <input name="mansagem" class="container__input" type="text">
+
+        <button class="container__button__enviar">Enviar 📩</button>
+    </form>
+
+    <div class="container__aparece__comentario">
+        <div class="container__aparece_usuario_data"></div>
+    </div>
+    
+</body>
+</html>
