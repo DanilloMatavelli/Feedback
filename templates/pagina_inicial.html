@@ -26,8 +26,18 @@
     </form>
 
     <div class="container__aparece__comentario">
-        <div class="container__aparece_usuario_data"></div>
+        {% for mensagem in mensagens %}
+        <div class="container__aparece_usuario_data">
+            <strong>{{mensagem.usuario}} ({{mensagem.data_hora}})</strong>
+            <p>{{mensagem.mensagem}}</p>
+        </div>
+        {% endfor %}
+        
     </div>
+
+    <!-- <div class="container__aparece__comentario">
+        <div class="container__aparece_usuario_data"></div>
+    </div> -->
     
 </body>
 </html>

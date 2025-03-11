@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect
 import datetime
 import mysql.connector
+from data.conexao import Conexao
+from model.controler_mensagem import Mensagem
 
 app = Flask(__name__)
 
@@ -14,7 +16,13 @@ lista_mensagem = [
 @app.route("/")
 def pagina_inicial():
     # Para escrever na página HTML
-    return render_template ("pagina_inicial.html")
+    # Recuperar as mensagens
+    mensagens = Mensagem.recuperar_mensagens()
+    
+    # Enviar as mensagens para o template
+    return render_template("index.html", mensagens = mensagens)
+
+    # return render_template ("pagina_inicial.html")
 
 # Rota para pegar dados do HTML É POST para Mandar pro HTML é GET
 @app.route("/post/mensagem" , methods = ["POST"])
@@ -23,41 +31,12 @@ def post_mensagem():
     # Para pegar o campo do úsuario no HTML
     # Peguei as informações vinda do formulario
     usuario = request.form.get("usuario")
-    mensagem = request.form.get("mansagem")
-    data_hora = datetime.datetime.today()
-
-    # CADASTRANDO AS INFORMAÇÕES NO BANCO DE DADOS
-    # Criando a coneção 
-
-    conexao = mysql.connector.connect(
-        host = "localhost", port = 3306,
-        user = "root",
-        password = "root",
-        database = "feedback"
-    )
-
-    # O cursor será responsavel por manipular o banco de dados 
-    cursor = conexao.cursor()
-
-    # Criando o SQL que será executado 
-    sql = """INSERT INTO tb_comentarios
-                (nome, comentarios, data_hora)
-             VALUES
-                (%s, %s, %s)"""
+    mensagem = request.form.get("mensagem")
     
-    valores = (usuario, mensagem, data_hora)
-
-    # Executando o comando SQL
-    cursor.execute(sql,valores)
-
-    # Confirmo a alteração
-    conexao.commit()
-
-    # Fecho a conexão com o Banco
-    cursor.close()
-    conexao.close()
+    # Cadastrando a mensagem usando a classe mensagem
+    Mensagem.cadastrar_mensagem(usuario, mensagem)
     
-
+    
     # Redireiona para a pagina inicial
     return redirect("/")
 
