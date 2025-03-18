@@ -20,7 +20,7 @@ def pagina_inicial():
     mensagens = Mensagem.recuperar_mensagens()
     
     # Enviar as mensagens para o template
-    return render_template("index.html", mensagens = mensagens)
+    return render_template("pagina_inicial.html", mensagens = mensagens)
 
     # return render_template ("pagina_inicial.html")
 
@@ -34,12 +34,29 @@ def post_mensagem():
     mensagem = request.form.get("mensagem")
     
     # Cadastrando a mensagem usando a classe mensagem
-    Mensagem.cadastrar_mensagem(usuario, mensagem)
+    Mensagem.cadastrarmensagem(usuario, mensagem)
     
     
     # Redireiona para a pagina inicial
     return redirect("/")
 
+# Rota para excluir um comentário
+@app.route("/delete/mensagem/<codigo>")
+def delete_mensagem(codigo):
+
+    # Chamando a função para deletar
+    Mensagem.deletar_mensagem(codigo)
+    return redirect("/")
+
+# Rota para obter curtida
+@app.route('/put/mensagem/adicionar/curtida/<codigo>')
+def adicionar_curtida(codigo):
+
+#     # Chama a função para adicionar a curtida
+#     Mensagem.adicionar_curtida(codigo) 
+    
+    # Redireciona para a página inicial
+    return redirect('/') 
 
 # Para iniciar o app
 app.run(debug=True)

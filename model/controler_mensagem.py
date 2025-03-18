@@ -16,11 +16,11 @@ class Mensagem:
 
         # Criando o SQL que será executado 
         sql = """INSERT INTO tb_comentarios
-                    (nome, comentarios, data_hora)
+                    (nome, data_hora, comentario)
                 VALUES
                     (%s, %s, %s)"""
         
-        valores = (usuario, mensagem, data_hora)
+        valores = (usuario, data_hora , mensagem)
 
         # Executando o comando SQL
         cursor.execute(sql,valores)
@@ -42,9 +42,11 @@ class Mensagem:
         cursor = conexao.cursor(dictionary = True)
         
         # Define a consulta SQL
-        sql = """SELECT nome as usuario, 
-                        comentarios as mensagem,
-                        data_hora
+        sql = """SELECT cod_comentario,
+                        nome as usuario, 
+                        data_hora,
+                        curtidas,
+                        comentario as mensagem
                  FROM tb_comentarios"""
                  
         # Executando o comando SQL
@@ -60,6 +62,58 @@ class Mensagem:
         
         return resultado
 
+    # Pegar as mensagens e excluir do HTML
+    def deletar_mensagem(codigo):
+        # DELETANDO AS INFORMAÇÕES NO BANCO DE DADOS
+        # Criando a coneção 
 
+        conexao = Conexao.criar_conexao()
 
+        # O cursor será responsavel por manipular o banco de dados 
+        cursor = conexao.cursor()
+
+        # Criando o SQL que será executado para deletar o comentário
+        sql = """DELETE FROM tb_comentarios
+                 WHERE cod_comentario = %s"""
         
+        # O valor do cod_comentario a ser deletado
+        valores = (codigo,)
+
+        # Executando o comando SQL
+        cursor.execute(sql,valores)
+
+        # Confirmo a alteração
+        conexao.commit()
+
+        # Fecho a conexão com o Banco
+        cursor.close()
+        conexao.close()
+
+    # Pegar os likes do HTML
+    def adicionar_curtida(codigo):
+        # Criando a conexão com o banco de dados
+        conexao = Conexao.criar_conexao()
+
+        # O cursor será responsável por manipular o banco de dados
+        cursor = conexao.cursor()
+
+        # Criando o SQL que será executado para adicionar uma curtida
+        sql = """UPDATE tb_comentarios
+                 SET curtidas = curtidas + 1
+                 WHERE cod_comentario = %s"""
+    
+        # O valor do cod_comentario que será atualizado
+        valores = (codigo,)
+
+        # Executando o comando SQL
+        cursor.execute(sql, valores)
+
+        # Confirmo a alteração
+        conexao.commit()
+
+        # Fecho a conexão com o banco de dados
+        cursor.close()
+        conexao.close()
+    
+
+    

@@ -7,6 +7,12 @@
     <title>Comentários</title>
     <!-- Link usando jinja para linkar o css -->
     <link rel="stylesheet" href="{{ url_for('static' , filename = 'style.css') }}">
+
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
     <div class="container__title">
@@ -20,20 +26,72 @@
 
         <label class="container__label">Mensagem</label>
         <!-- Colocando name para chamar no app.py -->
-        <input name="mansagem" class="container__input" type="text">
+        <input name="mensagem" class="container__input" type="text">
+
+        <!-- Icone LIKE -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <!-- Icone De Deslike -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <button class="container__button__enviar">Enviar 📩</button>
     </form>
 
-    <div class="container__aparece__comentario">
-        {% for mensagem in mensagens %}
-        <div class="container__aparece_usuario_data">
-            <strong>{{mensagem.usuario}} ({{mensagem.data_hora}})</strong>
-            <p>{{mensagem.mensagem}}</p>
-        </div>
-        {% endfor %}
+    
+        <table>
+            <thead>
+                <td>
+                    USUÁRIO
+                </td>
+
+                <td>
+                    MENSAGEM
+                </td>
+
+                <td>
+                    DATA
+                </td>
+
+                <td>
+                    AÇÕES
+                </td>
+
+                <td>
+                    CURTIDAS
+                </td>
+
+            </thead>
+            <tbody>
+                {% for mensagem in mensagens %}
+                <tr>
+                    <td>
+                       {{ mensagem.usuario}}
+                    </td>  
+
+                    <td>
+                        {{mensagem.mensagem}}
+                    </td>
+
+                    <td>
+                        {{mensagem.data_hora}}
+                    </td>
+
+                    <td>
+                        <a href="/delete/mensagem/{{mensagem.cod_comentario}}" type="submit" class="btn-delete">APAGAR</a>
+                        <a href="">CURTIR</a>
+                    </td>
+
+                    <td>
+                        {{mensagem.curtidas}}
+                    </td>
+                
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
         
-    </div>
+  
 
     <!-- <div class="container__aparece__comentario">
         <div class="container__aparece_usuario_data"></div>

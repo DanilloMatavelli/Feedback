@@ -1,5 +1,5 @@
 body{
-    background-color: brown;
+    background-color: rgba(48, 14, 218, 0.647);
 }
 
 .container__label{
@@ -36,15 +36,15 @@ body{
 }
 
 .container__aparece__comentario{
-    /* height: auto;
+    height: auto;
+    width: 700px;
     overflow: hidden;
     transition: height 0.5s ease-in-ou;
-    margin-top: 30px; */
+    margin-top: 30px;
     
     margin-top: 30px;
     margin-left: 250px;
-    width: 700px;
-    height: 200px;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
