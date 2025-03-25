@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Usúario</title>
+    <link rel="stylesheet" href="/static/cadastrar.css">
+</head>
+<body>
+    <div class="container__title">
+        <h1>FEEDBACK 😎</h1>
+        <h2>Cadastra Usuario</h2>
+    </div>
+
+    <form action="/post/usuario" method="POST" class="container__form">
+        <label class="container__label">Login:</label>
+        <!-- Colocando name para chamar no app.py -->
+        <input name="login" class="container__input" type="text">
+
+        <label class="container__label">Usuario:</label>
+        <!-- Colocando name para chamar no app.py -->
+        <input name="usuario" class="container__input" type="text">
+
+        <label class="container__label">SENHA:</label>
+        <!-- Colocando name para chamar no app.py -->
+        <input name="senha" class="container__input" type="text">
+
+        <button class="container__button__enviar">Enviar 📩</button>
+
+    </form>
+
+
+</body>
+</html>

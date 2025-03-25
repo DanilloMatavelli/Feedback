@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,18 +9,19 @@
     <!-- Link usando jinja para linkar o css -->
     <link rel="stylesheet" href="{{ url_for('static' , filename = 'style.css') }}">
 
-     <!-- Compiled and minified CSS -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-     <!-- Compiled and minified JavaScript -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
+
 <body>
     <div class="container__title">
         <h1>FEEDBACK 😎</h1>
         <h2>SUPER MASTER PÁGINA</h2>
     </div>
-    <form action= "/post/mensagem"  method = "POST" class="container__form">
+    <form action="/post/mensagem" method="POST" class="container__form">
         <label class="container__label">Usuário</label>
         <!-- Colocando name para chamar no app.py -->
         <input name="usuario" class="container__input" type="text">
@@ -37,65 +39,80 @@
         <button class="container__button__enviar">Enviar 📩</button>
     </form>
 
-    
-        <table>
-            <thead>
+
+    <table>
+        <thead>
+            <td>
+                USUÁRIO
+            </td>
+
+            <td>
+                MENSAGEM
+            </td>
+
+            <td>
+                DATA
+            </td>
+
+            <td>
+                AÇÕES
+            </td>
+
+            <td>
+                CURTIDAS
+            </td>
+
+        </thead>
+        <tbody>
+            {% for mensagem in mensagens %}
+            <tr>
                 <td>
-                    USUÁRIO
+                    {{ mensagem.usuario}}
                 </td>
 
                 <td>
-                    MENSAGEM
+                    {{mensagem.mensagem}}
                 </td>
 
                 <td>
-                    DATA
+                    {{mensagem.data_hora}}
                 </td>
 
                 <td>
-                    AÇÕES
+                    <a href="/delete/mensagem/{{mensagem.cod_comentario}}" type="submit" class="btn-delete">APAGAR</a>
+
                 </td>
 
                 <td>
-                    CURTIDAS
+                    <!-- Exibe a quantidade de curtidas e atualiza dinamicamente -->
+                    <span id="curtidas-{{mensagem.cod_comentario}}">{{mensagem.curtidas}}</span>
+
+                    <!-- Botão de Curtir com evento de clique -->
+                    <a href="/put/mensagem/adicionar/curtida/{{mensagem.cod_comentario}}" type="submit" class="btn-curtir">👍</a>
+                    
                 </td>
 
-            </thead>
-            <tbody>
-                {% for mensagem in mensagens %}
-                <tr>
-                    <td>
-                       {{ mensagem.usuario}}
-                    </td>  
+                <td>
+                    <!-- Exibe a quantidade de curtidas e atualiza dinamicamente -->
+                    <span id="curtidas-{{mensagem.cod_comentario}}">{{mensagem.curtidas}}</span>
 
-                    <td>
-                        {{mensagem.mensagem}}
-                    </td>
+                    <!-- Botão de Curtir com evento de clique -->
+                    <a href="/put/mensagem/delete/curtida/{{mensagem.cod_comentario}}" type="submit" class="btn-descurtir">👎</a>
+                    
+                </td>
 
-                    <td>
-                        {{mensagem.data_hora}}
-                    </td>
+            </tr>
 
-                    <td>
-                        <a href="/delete/mensagem/{{mensagem.cod_comentario}}" type="submit" class="btn-delete">APAGAR</a>
-                        <a href="">CURTIR</a>
-                    </td>
+            {% endfor %}
+        </tbody>
+    </table>
 
-                    <td>
-                        {{mensagem.curtidas}}
-                    </td>
-                
-                </tr>
 
-                {% endfor %}
-            </tbody>
-        </table>
-        
-  
 
     <!-- <div class="container__aparece__comentario">
         <div class="container__aparece_usuario_data"></div>
     </div> -->
-    
+
 </body>
+
 </html>

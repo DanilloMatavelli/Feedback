@@ -115,5 +115,58 @@ class Mensagem:
         cursor.close()
         conexao.close()
     
+ # Pegar os likes do HTML
+    def deletar_curtida(codigo):
+        # Criando a conexão com o banco de dados
+        conexao = Conexao.criar_conexao()
 
+        # O cursor será responsável por manipular o banco de dados
+        cursor = conexao.cursor()
+
+        # Criando o SQL que será executado para adicionar uma curtida
+        sql = """UPDATE tb_comentarios
+                 SET curtidas = curtidas - 1
+                 WHERE cod_comentario = %s"""
     
+        # O valor do cod_comentario que será atualizado
+        valores = (codigo,)
+
+        # Executando o comando SQL
+        cursor.execute(sql, valores)
+
+        # Confirmo a alteração
+        conexao.commit()
+
+        # Fecho a conexão com o banco de dados
+        cursor.close()
+        conexao.close()
+    
+
+class Usuario: 
+    def cadastrarUsuario(login, usuario, senha):
+
+        # CADASTRANDO AS INFORMAÇÕES NO BANCO DE DADOS
+        # Criando a coneção 
+
+        conexao = Conexao.criar_conexao()
+
+        # O cursor será responsavel por manipular o banco de dados 
+        cursor = conexao.cursor()
+
+        # Criando o SQL que será executado 
+        sql = """INSERT INTO tb_usuarios
+                    (login, nome, senha)
+                VALUES
+                    (%s, %s, %s)"""
+        
+        valores = (login, usuario , senha)
+
+        # Executando o comando SQL
+        cursor.execute(sql,valores)
+
+        # Confirmo a alteração
+        conexao.commit()
+
+        # Fecho a conexão com o Banco
+        cursor.close()
+        conexao.close()
