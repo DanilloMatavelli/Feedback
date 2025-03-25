@@ -12,7 +12,7 @@ lista_mensagem = [
 
 
 
-# AQUI IRÁ TODAS AS MINHAS ROTAS
+# AQUI IRÁ TODAS AS MINHAS ROTAS QUE ESTÃO NO PROGRAMA
 @app.route("/")
 def pagina_inicial():
     # Para escrever na página HTML
