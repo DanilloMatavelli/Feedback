@@ -1,53 +1,83 @@
-body{
-    background-color: rgba(48, 14, 218, 0.647);
+body {
+    background: linear-gradient(135deg, rgba(48, 14, 218, 0.8), rgba(14, 218, 184, 0.8));
+    font-family: Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-.container__label{
+.container__label {
     color: white;
+    font-size: 1rem;
 }
 
-.container__title{
+.container__title {
     text-align: center;
     color: antiquewhite;
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
-.container__form{
+.container__form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.container__input{
+.container__input {
     border: none;
     border-bottom: 2px solid black;
     outline: none;
     padding: 5px;
     width: 80%;
-    margin: 10, 0;
+    margin: 10px 0;
+    background: transparent;
+    color: white;
+    font-size: 1rem;
 }
 
-.container__button__enviar{
+.container__input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.container__button__enviar {
     background-color: antiquewhite;
+    border: none;
     border-radius: 5px;
     width: 200px;
     height: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
 }
 
-.container__aparece__comentario{
+.container__button__enviar:hover {
+    background-color: #f5deb3;
+    transform: scale(1.05);
+}
+
+.container__aparece__comentario {
     height: auto;
     width: 700px;
     overflow: hidden;
-    transition: height 0.5s ease-in-ou;
+    transition: height 0.5s ease-in-out;
     margin-top: 30px;
-    
-    margin-top: 30px;
-    margin-left: 250px;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color:  antiquewhite;
+    background-color: antiquewhite;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }

@@ -141,32 +141,3 @@ class Mensagem:
         cursor.close()
         conexao.close()
     
-
-class Usuario: 
-    def cadastrarUsuario(login, usuario, senha):
-
-        # CADASTRANDO AS INFORMAÇÕES NO BANCO DE DADOS
-        # Criando a coneção 
-
-        conexao = Conexao.criar_conexao()
-
-        # O cursor será responsavel por manipular o banco de dados 
-        cursor = conexao.cursor()
-
-        # Criando o SQL que será executado 
-        sql = """INSERT INTO tb_usuarios
-                    (login, nome, senha)
-                VALUES
-                    (%s, %s, %s)"""
-        
-        valores = (login, usuario , senha)
-
-        # Executando o comando SQL
-        cursor.execute(sql,valores)
-
-        # Confirmo a alteração
-        conexao.commit()
-
-        # Fecho a conexão com o Banco
-        cursor.close()
-        conexao.close()

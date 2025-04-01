@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect
+import hashlib
+from flask import Flask, render_template, request, redirect, session, flash
 import datetime
 import mysql.connector
 from data.conexao import Conexao
 from model.controler_mensagem import Mensagem
-from model.controler_mensagem import Usuario
+from model.controler_usuario import Usuario
+from model.controler_usuario import Login
 
 app = Flask(__name__)
 
@@ -102,7 +104,7 @@ def post_usuario():
     # Redireiona para a pagina inicial
     return redirect("/usuario")
 
-# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ROTAS DE LOGIN
 
 @app.route("/login")
@@ -113,6 +115,23 @@ def pagina_login():
     # Enviar as mensagens para o template
     return render_template("login.html")
 
+
+# Rota para pegar dados do HTML É POST para Mandar pro HTML é GET
+@app.route("/post/login" , methods = ["POST"] )
+def post_login():
+    
+    # Para pegar o campo do úsuario no HTML
+    # Peguei as informações vinda do formulario
+    login = request.form.get("login")
+
+    senha = request.form.get("senha")
+    
+    # Cadastrando a mensagem usando a classe mensagem
+    Usuario.verificarLogin(login , senha )
+
+    return redirect("/login")
+
+    
 
 # Para iniciar o app
 app.run(debug=True)
