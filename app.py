@@ -9,6 +9,9 @@ from model.controler_usuario import Usuario
 
 app = Flask(__name__)
 
+# Criando para poder usar sessões
+app.secret_key = "Godofredolindo"
+
 lista_mensagem = [
 
 ]
@@ -19,15 +22,17 @@ lista_mensagem = [
 @app.route("/")
 @app.route("/comentario")
 def pagina_inicial():
-    # Para escrever na página HTML
-    # Recuperar as mensagens
-    # Somente para recuperar alguma coisa 
-    mensagens = Mensagem.recuperar_mensagens()
+    if "usuario" in session:
+        # Para escrever na página HTML
+        # Recuperar as mensagens
+        # Somente para recuperar alguma coisa 
+        mensagens = Mensagem.recuperar_mensagens()
     
-    # Enviar as mensagens para o template
-    return render_template("pagina_inicial.html", mensagens = mensagens)
-
-    # return render_template ("pagina_inicial.html")
+        # Enviar as mensagens para o template
+         # return render_template ("pagina_inicial.html")
+        return render_template("pagina_inicial.html", mensagens = mensagens)   
+    else:
+        return redirect("/login")
 
 # Rota para pegar dados do HTML É POST para Mandar pro HTML é GET
 @app.route("/post/mensagem" , methods = ["POST"])

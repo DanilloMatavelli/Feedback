@@ -1,4 +1,6 @@
 from hashlib import sha256
+
+from flask import session
 from data.conexao import Conexao
 import datetime
 
@@ -42,7 +44,7 @@ class Usuario:
         cursor = conexao.cursor()
 
         # Criando o SQL para buscar o usuário e senha
-        sql = """SELECT * FROM tb_usuarios
+        sql = """SELECT login, nome FROM tb_usuarios
                     WHERE login = %s
                     AND binary senha = %s;"""
         
@@ -59,6 +61,10 @@ class Usuario:
 
         # Verifica se o usuario está corretor, se tiver retorna True, senão retorne false
         if resultado:
+            # Peguei o login e coloquei dentro da sessão usuario
+            session['usuario'] = resultado[0] 
+            # Peguei o nome e coloquei dentro da sessão nome_usuario
+            session['nome_usuario'] = resultado[1]  
             return True
         else:
             return False
