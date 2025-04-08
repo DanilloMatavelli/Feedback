@@ -5,7 +5,7 @@ import mysql.connector
 from data.conexao import Conexao
 from model.controler_mensagem import Mensagem
 from model.controler_usuario import Usuario
-from model.controler_usuario import Login
+
 
 app = Flask(__name__)
 
@@ -110,26 +110,29 @@ def post_usuario():
 @app.route("/login")
 def pagina_login():
     # Para escrever na página HTML
-    # Recuperar as mensagens
     
-    # Enviar as mensagens para o template
+    # Enviar o usuario para o template
     return render_template("login.html")
 
 
 # Rota para pegar dados do HTML É POST para Mandar pro HTML é GET
-@app.route("/post/login" , methods = ["POST"] )
-def post_login():
+@app.route("/post/logar" , methods = ["POST"] )
+def post_logar():
     
     # Para pegar o campo do úsuario no HTML
     # Peguei as informações vinda do formulario
-    login = request.form.get("login")
+    usuario = request.form.get("login")
 
     senha = request.form.get("senha")
     
-    # Cadastrando a mensagem usando a classe mensagem
-    Usuario.verificarLogin(login , senha )
+    # Cadastrando o usuario usando a classe Usuario
+    esta_logado = Usuario.verificarLogin(usuario , senha )
 
-    return redirect("/login")
+    # Verificando se o builiano criado no controler_usuario for True ele direcina para página comentários, senão direciona para página login
+    if esta_logado:
+        return redirect('/comentario')
+    else:
+        return redirect('/login')
 
     
 

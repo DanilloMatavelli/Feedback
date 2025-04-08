@@ -53,17 +53,14 @@ class Usuario:
         # fetchone retorna apenas um valor 
         resultado = cursor.fetchone()
 
-        # Fecho a conexão com o Banco
+        # Fecho a conexão e o cursor com o Banco
         cursor.close()
         conexao.close()
 
-        # Verificando se o login existe
+        # Verifica se o usuario está corretor, se tiver retorna True, senão retorne false
         if resultado:
-            login_armazenado, senha_armazenada = resultado  # Pegando os dados do banco
-            # Comparação direta (não recomendado para senhas reais)
-            if senha == senha_armazenada:  
-                return f"Login bem-sucedido! Bem-vindo, {login_armazenado}!"
-            else:
-                return "Senha incorreta. Tente novamente."
+            return True
         else:
-            return "Usuário não encontrado."
+            return False
+
+       
