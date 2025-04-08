@@ -6,7 +6,7 @@ class Conexao:
         # Criando a coneção 
 
         conexao = mysql.connector.connect(
-            host = "10.110.134.2", port = 3306,
+            host = "bdgodofredo-alexstocco-93db.b.aivencloud.com", port = 27974,
             user = "3ds",
             password = "banana",
             database = "db_feedback"
