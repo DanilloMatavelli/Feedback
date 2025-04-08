@@ -31,6 +31,7 @@ def pagina_inicial():
         # Enviar as mensagens para o template
          # return render_template ("pagina_inicial.html")
         return render_template("pagina_inicial.html", mensagens = mensagens)   
+        
     else:
         return redirect("/login")
 
