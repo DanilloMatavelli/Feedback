@@ -21,6 +21,8 @@
         <h1>FEEDBACK 😎</h1>
         <h2>SUPER MASTER PÁGINA</h2>
         <h3>Seja Bem-vindo {{session["nome_usuario"]}}</h3>
+        <!-- Coloquei no href o link para a rota logoff e assim que entrar nela retorna para pagina de login -->
+        <a href="/logoff"><button name="logoff" class="btn-logoff">Sair Da Conta</button></a>
     </div>
     <form action="/post/mensagem" method="POST" class="container__form">
         <label class="container__label">Usuário</label>

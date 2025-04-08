@@ -140,6 +140,14 @@ def post_logar():
     else:
         return redirect('/login')
 
+# ROTAS DE LOGOFF
+@app.route("/logoff")
+def post_deslogar():
+
+    # Enviar as mensagens para o template
+    return render_template("login.html")
+
+    
     
 
 # Para iniciar o app

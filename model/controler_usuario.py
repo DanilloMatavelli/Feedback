@@ -69,4 +69,6 @@ class Usuario:
         else:
             return False
 
+    def logoff():
+        session.clear()
        
