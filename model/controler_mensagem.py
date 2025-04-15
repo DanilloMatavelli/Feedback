@@ -61,7 +61,41 @@ class Mensagem:
         conexao.close()
         
         return resultado
-
+    
+    def ultima_mensagem(usuario):
+        # Criar conexão
+        conexao = Conexao.criar_conexao()
+        
+        # O cursor será responsavel por manipular o banco de dados 
+        cursor = conexao.cursor(dictionary=True)
+        
+        # Define a consulta SQL para buscar última mensagem do usuário
+        sql = """
+            SELECT cod_comentario,
+                   nome as usuario,
+                   data_hora,
+                   curtidas,
+                   comentario as mensagem
+            FROM tb_comentarios
+            WHERE nome = %s
+            ORDER BY data_hora DESC
+            LIMIT 1
+        """
+        
+        valores = (usuario,)
+        
+         # Executando o comando SQL
+        cursor.execute(sql, valores)
+        
+        # Pega a última mensagem
+        resultado = cursor.fetchone()
+        
+        # Fecha a conexão
+        cursor.close()
+        conexao.close()
+        
+        return resultado
+    
     # Pegar as mensagens e excluir do HTML
     def deletar_mensagem(codigo):
         # DELETANDO AS INFORMAÇÕES NO BANCO DE DADOS
